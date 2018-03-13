@@ -1,0 +1,19 @@
+{
+  "name": "Helioviewer-visualisation-frontend",
+  "version": "0.0.1",
+  "description": "Frontend for helioviewer timeline",
+  "main": "index.ejs",
+  "sideEffects": false,
+  "scripts": {
+    "start": "webpack-dev-server --color",
+  },
+  "repository": "https://github.com/stby4/helioviewer-visualisation-frontend.git",
+  "author": "Hinrich Kaestner <hinrich.kaestner@gmail.com>",
+  "license": "MPL",
+  "private": false,
+  "devDependencies": {
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11",
+    "webpack-dev-server": "^3.1.1"
+  }
+}
