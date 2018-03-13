@@ -1,7 +1,52 @@
 # Helioviewer visualisation frontend
 Lightweight frontend for the helioviewer visualisation (timeline)
 
+## Goals
+- Easy to use timeline
+- Quick navigation to solar events on [helioviewer.org](http://helioviewer.org)
+- Timeline can be implemented in helioviwer.org main application
+
 # Getting started
+This project uses [yarn](https://yarnpkg.com/). Install it, if you have not already done so.
+1. Open a console and exexute `yarn` to install all dependencies
+2. `yarn start` to start dev server
+3. Open your favourite browser and navigate to [localhost:8082](http://localhost:8082)
+
+# Build and test
+## Yarn commands
+- `yarn start` will start a development server on [localhost:8082](http://localhost:8082) with hot module reloading (reloads complete page for now)
+- `yarn run build` builds the app for deployment and creates all necessary artifacts in the _dist_ folder
+- `yarn test` exeuctes [Jest tests](http://facebook.github.io/jest/)
+- `yarn test:watch` watches for changed files and executes tests on them automatically
+- `yarn coverage` to execute Jest coverage
+
+## Tests
+Tests shall be placed close to the files that are beeing tested. Create a folder called `__tests__` and place a file `*-test.js` in there, where * is the filename of the tested file.
+
+# Key concepts
+- [Sass](http://sass-lang.com) modules
+- Testing with [Jest](https://facebook.github.io/jest/)
+
+# Project overview
+
+## Structure
+The _app_ directory contains:
+- modules: [ES6 modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) to provide functionality
+- modules/\__tests__: Jest test cases
+- theme: Sass-Files
+
+## Clean code
+- [JSDoc](http://usejsdoc.org/) comments must be included for function and class definitions. Markdown can be used in comments
+- Basic rules like text intendation are automatically applied by your editor through the [.editorconfig]
+  (http://editorconfig.org) file
+- Automatic semicolon insertion (ASI) is enforced in this project
+- _iteratable_ objects must have a `,` even after the last element
+- Conditional statements must use curly brackets only when it spans multiple lines
+- It is disallowed to reassign _function_ parameters
+- No redeclaration of variables
+- No _with_ statement ([ready why](https://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/))
+
+# Read
 - https://webpack.js.org/
 - https://yarnpkg.com/
 - https://facebook.github.io/jest/

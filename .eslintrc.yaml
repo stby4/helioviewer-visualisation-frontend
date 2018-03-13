@@ -1,0 +1,94 @@
+---
+extends:
+- prettier
+plugins:
+- prettier
+parser: babel-eslint
+settings:
+  ecmascript: 6
+  propWrapperFunctions:
+  - forbidExtraProps
+parserOptions:
+  sourceType: module
+  allowImportExportEverywhere: false
+  ecmaVersion: 6
+env:
+  browser: true
+  jest: true
+rules:
+  eol-last:
+  - 2
+  - always
+  curly:
+  - 2
+  - multi
+  semi:
+  - 2
+  - never
+  func-style:
+  - 2
+  - declaration
+  - allowArrowFunctions: true
+  func-names:
+  - 2
+  - as-needed
+  getter-return: 2
+  comma-dangle:
+  - 2
+  - always-multiline
+  # Enable no-console before going into production
+  no-console: 0
+  no-param-reassign:
+  - 2
+  - props: true
+  object-shorthand:
+  - 2
+  - always
+  - avoidQuotes: true
+  no-underscore-dangle: 2
+  no-new-object: 2
+  no-with: 2
+  require-jsdoc:
+  - 2
+  - require:
+      FunctionDeclaration: true
+      MethodDefinition: false
+      ClassDeclaration: true
+      ArrowFunctionExpression: false
+      FunctionExpression: false
+  quotes:
+  - 2
+  - single
+  - allowTemplateLiterals: true
+  sort-vars: 1
+  valid-jsdoc: 2
+  spaced-comment:
+  - 2
+  - always
+  - line:
+      markers:
+      - "/"
+      exceptions:
+      - "-"
+      - "+"
+    block:
+      markers:
+      - "!"
+      exceptions:
+      - "*"
+      balanced: true
+  capitalized-comments:
+  - 2
+  - always
+  multiline-comment-style:
+  - 2
+  - starred-block
+  prettier/prettier:
+  - 2
+  - tabWidth: 4
+    arrowParens: avoid
+    trailingComma: es5
+    printWidth: 120
+    semi: false
+    singleQuote: true
+    proseWrap: preserve

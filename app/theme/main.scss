@@ -1,0 +1,26 @@
+@import 'theme/__variables';
+
+html,
+body {
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font-default;
+  font-size: 15px;
+  color: $color-front;
+  background-color: $color-back;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+:global(#root) {
+  height: 100%;
+}
