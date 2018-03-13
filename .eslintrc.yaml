@@ -77,9 +77,6 @@ rules:
       exceptions:
       - "*"
       balanced: true
-  capitalized-comments:
-  - 2
-  - always
   multiline-comment-style:
   - 2
   - starred-block

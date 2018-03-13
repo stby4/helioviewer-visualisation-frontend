@@ -16,6 +16,8 @@ This project uses [yarn](https://yarnpkg.com/). Install it, if you have not alre
 ## Yarn commands
 - `yarn start` will start a development server on [localhost:8082](http://localhost:8082) with hot module reloading (reloads complete page for now)
 - `yarn run build` builds the app for deployment and creates all necessary artifacts in the _dist_ folder
+- `yarn run lint` starts [ESLint](https://eslint.org/) for linting and [Prettier](https://prettier.io) for clean code
+- `yarn run lint:fix` tries to automatically fix errors
 - `yarn test` exeuctes [Jest tests](http://facebook.github.io/jest/)
 - `yarn test:watch` watches for changed files and executes tests on them automatically
 - `yarn coverage` to execute Jest coverage

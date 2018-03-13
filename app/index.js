@@ -2,4 +2,4 @@
 
 import 'theme/main.scss'
 
-document.getElementById('root').innerText = "Hello World"
+document.getElementById('root').innerText = 'Hello World'
