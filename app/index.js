@@ -1,5 +1,6 @@
 // import 'modules/loader'
+import Timeline from 'components/Timeline'
 
 import 'theme/main.scss'
 
-document.getElementById('root').innerText = 'Hello World'
+document.getElementById('root').innerHTML = Timeline()
