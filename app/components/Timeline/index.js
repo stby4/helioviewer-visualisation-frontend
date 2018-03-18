@@ -1,7 +1,4 @@
-/*
- * import Highcharts from 'highcharts'
- * import loader from 'modules/loader'
- */
+import Chart from './Chart'
 import style from './style'
 
 /**
@@ -9,9 +6,7 @@ import style from './style'
  *
  * @returns {string} The timeline HTML
  */
-const Timeline = () =>
-    `<div class="${style.border}">
-        <span class="${style.temporary_text}">Hello World</span>
-    </div>`
+const TimelineMarkup = () => `<div id="${style.chart}"></div>`
 
-export default Timeline
+export const Timeline = () => Chart(style.chart)
+export default TimelineMarkup
