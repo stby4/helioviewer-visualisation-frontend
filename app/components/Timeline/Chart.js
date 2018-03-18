@@ -1,6 +1,11 @@
 import Highcharts from 'highcharts'
 import style from './style'
 
+/**
+ * Creates a highchart object
+ * @param {string} container - The ID for the highcharts container
+ * @returns {*} Highchart element (I think. I have some reading to do...)
+ */
 const Chart = container =>
     Highcharts.chart(container, {
         chart: {
