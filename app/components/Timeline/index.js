@@ -11,7 +11,7 @@ import style from './style'
  */
 const Timeline = () =>
     `<div class="${style.border}">
-        <span class="${style.temporary_text}">Hello World!!!</span>
+        <span class="${style.temporary_text}">Hello World NEW</span>
     </div>`
 
 export default Timeline
