@@ -7,7 +7,7 @@ Lightweight frontend for the helioviewer visualisation (timeline)
 - Timeline can be implemented in helioviwer.org main application
 
 # Getting started
-This project uses [yarn](https://yarnpkg.com/). Install it, if you have not already done so.
+This project uses [Node.js](https://nodejs.org/) and [yarn](https://yarnpkg.com/). Install them, if you have not already done so.
 1. Open a console and exexute `yarn` to install all dependencies
 2. `yarn start` to start dev server
 3. Open your favourite browser and navigate to [localhost:8082](http://localhost:8082)
