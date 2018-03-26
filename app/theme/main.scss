@@ -3,8 +3,8 @@
 html,
 body {
   -webkit-overflow-scrolling: touch;
-  height: 100%;
   box-sizing: border-box;
+  height:98%;
 }
 
 body {
@@ -21,21 +21,13 @@ body {
   box-sizing: inherit;
 }
 
-:global(#root) {
-  height: 100%;
+:global(#root){
+position: relative;
+border-top: 4px  solid #606063;
+padding-top: 10px;
 }
 
-#timestamp {
+h1{
   text-align: center;
-  font-size: 18pt;
-  padding-top:10px;
-  padding-bottom:30px;
-}
-
-#solarimage { 
-  width: auto;
-  height: auto;
-  opacity: 0.5;
-  position: relative;
-  padding: 10px;
+  font-size: 28pt;
 }

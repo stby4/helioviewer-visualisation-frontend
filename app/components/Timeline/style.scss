@@ -1,7 +1,15 @@
 @import 'theme/__variables';
 
 .chart {
-    height: 100%;
-    min-height: 300px;
+    //height: 200px;
+    //min-height: 100px;
     width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.highcharts-plot-band-label {
+    z-index: -2;
+    x:0;
 }

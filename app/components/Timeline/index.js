@@ -7,6 +7,5 @@ import style from './style'
  * @returns {string} The timeline HTML
  */
 const TimelineMarkup = () => `<div id="${style.chart}"></div>`
-
 export const Timeline = () => Chart(style.chart)
 export default TimelineMarkup
