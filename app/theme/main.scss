@@ -24,3 +24,18 @@ body {
 :global(#root) {
   height: 100%;
 }
+
+#timestamp {
+  text-align: center;
+  font-size: 18pt;
+  padding-top:10px;
+  padding-bottom:30px;
+}
+
+#solarimage { 
+  width: auto;
+  height: auto;
+  opacity: 0.5;
+  position: relative;
+  padding: 10px;
+}
