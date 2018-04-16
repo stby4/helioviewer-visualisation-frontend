@@ -9,7 +9,7 @@
  */
 
 export const timelineData = (from, to) => {
-    const url = 'http://localhost:8080/api?from=' + from + '&to=' + to + '&points=' + window.innerWidth
+    const url = 'http://localhost:8080/api?from=' + from + '&to=' + to + '&points=' + 5000
 
     return fetch(url)
         .then(response => response.json())

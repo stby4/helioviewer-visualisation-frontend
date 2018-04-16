@@ -14,8 +14,8 @@ Highcharts.theme = Theme
 // Apply the theme
 Highcharts.setOptions(Highcharts.theme)
 
-const Chart = container =>
-    Highcharts.chart(container, {
+const Chart = container => {
+    return timelineData('2017-01-01:00:00:00', '2018-01-01:00:00:00').then(data => Highcharts.chart(container, {
         chart: {
             height: 300,
             zoomType: 'x',
@@ -172,9 +172,10 @@ const Chart = container =>
         series: [
             {
                 name: 'Radiation',
-                data: timelineData('2017-01-01:00:00:00', '2018-01-01:00:00:00'), // Prod data: timelineData ; Demo data: demoDateValues
+                data: data
             },
         ],
-    })
+    }))
+}
 
 export default Chart
