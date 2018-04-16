@@ -2,6 +2,7 @@ import Highcharts from 'highcharts'
 import style from './style'
 import {Theme} from './Theme'
 import demoDateValues from './demoDateValues'
+import {timelineData} from '../../modules/loader'
 import boost from 'highcharts/modules/boost';
 boost(Highcharts);
 /**
@@ -165,7 +166,7 @@ const Chart = container =>
         series: [
             {
                 name: 'Radiation',
-                data: demoDateValues
+                data:  timelineData() //Prod data: timelineData ; Demo data: demoDateValues
             },
         ],
     })
