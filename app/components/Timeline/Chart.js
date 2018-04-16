@@ -172,7 +172,7 @@ const Chart = container =>
         series: [
             {
                 name: 'Radiation',
-                data: timelineData(), // Prod data: timelineData ; Demo data: demoDateValues
+                data: timelineData('2017-01-01:00:00:00', '2018-01-01:00:00:00'), // Prod data: timelineData ; Demo data: demoDateValues
             },
         ],
     })
