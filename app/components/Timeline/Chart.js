@@ -14,6 +14,9 @@ Highcharts.theme = Theme
 // Apply the theme
 Highcharts.setOptions(Highcharts.theme)
 
+const labelFontSize = '11pt'
+const labelColor = '#E0E0E3'
+
 const Chart = container => {
     return timelineData('2017-01-01:00:00:00', '2018-01-01:00:00:00').then(data => Highcharts.chart(container, {
         chart: {
@@ -56,9 +59,24 @@ const Chart = container => {
         },
         xAxis: {
             type: 'datetime',
+            dateTimeLabelFormats: {
+            /*  millisecond: '%H:%M:%S.%L',
+                second: '%H:%M:%S',
+                minute: '%H:%M',
+                hour: '%H:%M',
+                day: '%d    .%m.%Y',
+                week: '%m.%Y',
+                month: '%m\'%Y',
+                year: '%Y' */
+            },
+            labels: {
+                style: {
+                    fontSize: labelFontSize
+                }
+            }
         },
         title: {
-            text: 'Solar Event Timeline',
+            text: 'Solar Activity Timeline',
         },
         yAxis: {
             type: 'logarithmic',
@@ -67,11 +85,17 @@ const Chart = container => {
              *minorTickInterval: 0.1, 
              */
             title: {
-                text: 'Radiation',
-                x: -15,
+                text: 'X-ray Flux',
+                x: 0,
+                style: {
+                    fontSize: '14pt'
+                }
             },
             labels: {
-                x: -70,
+                x: -40,
+                style: {
+                    fontSize:labelFontSize
+                }
             },
             gridLineWidth: 0,
             tickLength: 0,
@@ -85,11 +109,12 @@ const Chart = container => {
                     borderwidth: '100',
                     borderColor: '#FFFF',
                     label: {
-                        text: 'A-Flare',
-                        x: -45,
+                        text: 'A',
+                        x: -20,
                         style: {
-                            color: '#E0E0E3',
+                            color: labelColor,
                             fontWeight: 'bold',
+                            fontSize: labelFontSize,
                         },
                     },
                 },
@@ -100,11 +125,12 @@ const Chart = container => {
                     // zIndex: 4,
                     color: 'rgba(0, 0, 0, 0)',
                     label: {
-                        text: 'B-Flare',
+                        text: 'B',
                         x: -45,
                         style: {
-                            color: '#E0E0E3',
+                            color: labelColor,
                             fontWeight: 'bold',
+                            fontSize: labelFontSize,
                         },
                     },
                 },
@@ -115,11 +141,12 @@ const Chart = container => {
                     // zIndex: 5,
                     color: 'rgba(40, 40, 40, 40)',
                     label: {
-                        text: 'C-Flare',
+                        text: 'C',
                         x: -45,
                         style: {
-                            color: '#E0E0E3',
+                            color: labelColor,
                             fontWeight: 'bold',
+                            fontSize: labelFontSize,
                         },
                     },
                 },
@@ -130,11 +157,12 @@ const Chart = container => {
                     // zIndex: 5,
                     color: 'rgba(0, 0, 0, 0)',
                     label: {
-                        text: 'M-Flare',
+                        text: 'M',
                         x: -45,
                         style: {
-                            color: '#E0E0E3',
+                            color: labelColor,
                             fontWeight: 'bold',
+                            fontSize: labelFontSize,
                         },
                     },
                 },
@@ -145,11 +173,12 @@ const Chart = container => {
                     // zIndex: 5,
                     color: 'rgba(40, 40, 40, 40)',
                     label: {
-                        text: 'X-Flare',
+                        text: 'X',
                         x: -45,
                         style: {
-                            color: '#E0E0E3',
+                            color: labelColor,
                             fontWeight: 'bold',
+                            fontSize: labelFontSize,
                         },
                     },
                 },
@@ -171,7 +200,7 @@ const Chart = container => {
         },
         series: [
             {
-                name: 'Radiation',
+                showInLegend: false,
                 data: data
             },
         ],
