@@ -103,7 +103,7 @@ const Chart = container => {
                 {
                     // A-Flare
                     from: 0,
-                    to: 10,
+                    to: 0.0000001,
                     // zIndex: 5,
                     color: 'rgba(40, 40, 40, 40)',
                     borderwidth: '100',
@@ -120,8 +120,8 @@ const Chart = container => {
                 },
                 {
                     // B-Flare
-                    from: 10,
-                    to: 100,
+                    from: 0.0000001,
+                    to: 0.000001,
                     // zIndex: 4,
                     color: 'rgba(0, 0, 0, 0)',
                     label: {
@@ -136,8 +136,8 @@ const Chart = container => {
                 },
                 {
                     // C-Flare
-                    from: 100,
-                    to: 1000,
+                    from: 0.000001,
+                    to: 0.00001,
                     // zIndex: 5,
                     color: 'rgba(40, 40, 40, 40)',
                     label: {
@@ -152,8 +152,8 @@ const Chart = container => {
                 },
                 {
                     // M-Flare
-                    from: 1000,
-                    to: 10000,
+                    from: 0.00001,
+                    to: 0.0001,
                     // zIndex: 5,
                     color: 'rgba(0, 0, 0, 0)',
                     label: {
@@ -168,7 +168,7 @@ const Chart = container => {
                 },
                 {
                     // X-Flare
-                    from: 10000,
+                    from: 0.0001,
                     to: 1000000000,
                     // zIndex: 5,
                     color: 'rgba(40, 40, 40, 40)',
