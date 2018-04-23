@@ -4,6 +4,8 @@ import { Theme } from './Theme'
 import demoDateValues from './demoDateValues'
 import { timelineData } from '../../modules/loader'
 import boost from 'highcharts/modules/boost'
+import SolarImagePreview from 'components/SolarImage'
+
 boost(Highcharts)
 /**
  * Creates a highchart object
@@ -16,6 +18,8 @@ Highcharts.setOptions(Highcharts.theme)
 
 const labelFontSize = '11pt'
 const labelColor = '#E0E0E3'
+var labelFluxXPosition = -20
+
 
 const Chart = container => {
     return timelineData('2017-01-01:00:00:00', '2018-04-12:00:00:00').then(data =>
@@ -26,10 +30,6 @@ const Chart = container => {
                 marginLeft: 150,
                 resetZoomButton: {
                     position: {
-                        /*
-                     * align: 'right', // by default
-                     * verticalAlign: 'top', // by default
-                     */
                         x: -10,
                         y: -40,
                     },
@@ -48,6 +48,8 @@ const Chart = container => {
                     },
                 },
 
+                //cick events on the whole chart
+                /*
                 events: {
                     click(event) {
                         cursor: 'pointer',
@@ -55,7 +57,8 @@ const Chart = container => {
                             'Date: ' + Highcharts.dateFormat('%Y %m %d %H %M %S \n', event.xAxis[0].value) + 'Value: ' + event.yAxis[0].value
                         );
                     }
-                },
+                }, 
+                */
             },
             xAxis: {
                 type: 'datetime',
@@ -99,20 +102,19 @@ const Chart = container => {
                         fontSize: labelFontSize,
                     },
                 },
-                gridLineWidth: 0,
-                tickLength: 0,
+                gridLineWidth: 1,
+                tickLength: 35,
                 plotBands: [
                     {
                         // A-Flare
                         from: 0,
                         to: 0.0000001,
-                        // zIndex: 5,
                         color: 'rgba(40, 40, 40, 40)',
                         borderwidth: '100',
                         borderColor: '#FFFF',
                         label: {
                             text: 'A',
-                            x: -20,
+                            x: labelFluxXPosition,
                             style: {
                                 color: labelColor,
                                 fontWeight: 'bold',
@@ -124,11 +126,10 @@ const Chart = container => {
                         // B-Flare
                         from: 0.0000001,
                         to: 0.000001,
-                        // zIndex: 4,
                         color: 'rgba(0, 0, 0, 0)',
                         label: {
                             text: 'B',
-                            x: -45,
+                            x: labelFluxXPosition,
                             style: {
                                 color: labelColor,
                                 fontWeight: 'bold',
@@ -140,11 +141,10 @@ const Chart = container => {
                         // C-Flare
                         from: 0.000001,
                         to: 0.00001,
-                        // zIndex: 5,
                         color: 'rgba(40, 40, 40, 40)',
                         label: {
                             text: 'C',
-                            x: -45,
+                            x: labelFluxXPosition,
                             style: {
                                 color: labelColor,
                                 fontWeight: 'bold',
@@ -160,7 +160,7 @@ const Chart = container => {
                         color: 'rgba(0, 0, 0, 0)',
                         label: {
                             text: 'M',
-                            x: -45,
+                            x: labelFluxXPosition,
                             style: {
                                 color: labelColor,
                                 fontWeight: 'bold',
@@ -172,11 +172,10 @@ const Chart = container => {
                         // X-Flare
                         from: 0.0001,
                         to: 1000000000,
-                        // zIndex: 5,
                         color: 'rgba(40, 40, 40, 40)',
                         label: {
                             text: 'X',
-                            x: -45,
+                            x: labelFluxXPosition,
                             style: {
                                 color: labelColor,
                                 fontWeight: 'bold',
@@ -192,13 +191,15 @@ const Chart = container => {
                     cursor: 'pointer',
                     point: {
                         events: {
-                            click() {
+                           click:function(event) {
+                               /*
                                 alert(
                                     'Date: ' +
-                                        Highcharts.dateFormat('%Y %m %d %H %M %S \n', this.x) +
+                                        Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ\n', this.x) +
                                         'Value: ' +
                                         this.y
-                                )
+                                ) */ 
+                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x))
                             },
                         },
                     },
