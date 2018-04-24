@@ -2,14 +2,16 @@
 
 #previewContainer{
   text-align: center;
-  min-height: 40vh;
+  min-height: 30vh;
 }
 
+
 .time {
-    text-align: center;
+    position: relative;
+    top: -30px;
+    //text-align: center;
     font-size: 14pt;
     color: #E0E0E3;
-    padding-bottom:20px;
   }
   
 #solarImage { 
@@ -19,11 +21,11 @@
     min-height: 10vh;
     max-height: 50vh;
     position: relative;
-    padding: 10px;
-    margin: auto;
-  }
+    }
 
 .button {
+  position: relative;
+  top: -15px;
   background-color: lightblue;
   color: black;
   padding: 0.2em 0.4em;
