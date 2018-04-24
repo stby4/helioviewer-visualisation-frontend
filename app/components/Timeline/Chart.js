@@ -85,6 +85,7 @@ const Chart = container => {
             },
             yAxis: {
                 type: 'logarithmic',
+                min: 0.000000009,
                 /*
              *additional horizontal dividers in chart
              *minorTickInterval: 0.1, 
