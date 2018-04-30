@@ -9,6 +9,9 @@ import style from './style'
 const SolarImagePreview = (timeParam, timeDisplay) =>
 `<div id="${style.previewContainer}">
 <img src="https://legacy.helioviewer.org/api/v1/takeScreenshot/?imageScale=1&layers=[SDO,AIA,AIA,171,10,100]&date=${timeParam}&x1=-1600&x2=1600&y1=-1250&y2=1300&display=true&watermark=false" 
-id="${style.solarImage}" alt="Solar Image Preview"><div class="${style.time}">${timeDisplay}</div><div><a class="${style.button}" href="https://helioviewer.org/?date=${timeParam}" target="_blank">View on helioviewer.org</a></div></div>`
+id="${style.solarImage}">
+<img src="././media/alt-solarimage.png" id="${style.solarImageLoading}" alt="Solar Image Loading">
+<div class="${style.time}">${timeDisplay}</div>
+<div><a class="${style.button}" href="https://helioviewer.org/?date=${timeParam}" target="_blank">View on helioviewer.org</a></div></div>`
 
 export default SolarImagePreview
