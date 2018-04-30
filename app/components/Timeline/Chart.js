@@ -188,6 +188,7 @@ const Chart = container => {
             },
             plotOptions: {
                 series: {
+                    name: "X-ray Flux",
                     allowPointSelect: true,
                     cursor: 'pointer',
                     point: {
