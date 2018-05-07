@@ -22,7 +22,7 @@ var labelFluxXPosition = -20
 
 
 const Chart = container => {
-    return timelineData('2017-01-01:00:00:00', '2018-04-12:00:00:00').then(data =>
+    return timelineData('2002-03-01:00:00:00', '2002-04-01:00:00:00').then(data =>
         Highcharts.chart(container, {
             chart: {
                 height: 300,
