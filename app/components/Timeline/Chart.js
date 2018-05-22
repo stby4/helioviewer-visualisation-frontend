@@ -61,6 +61,14 @@ const Chart = container => {
                 */
             },
             xAxis: {
+                events: {
+                    setExtremes:function(event) {
+                        alert(
+                            'Min: ' + event.min + '\nMax: ' + event.max
+                        )
+                        
+                    },
+                },
                 type: 'datetime',
                 dateTimeLabelFormats: {
                     /*
