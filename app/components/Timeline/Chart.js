@@ -209,7 +209,11 @@ const Chart = container => {
                                         'Value: ' +
                                         this.y
                                 ) */ 
-                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC', this.x) )
+                                if(Highcharts.dateFormat('%Y', this.x ) <= 2010){
+                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SOHO', this.x,), 'SOHO')
+                                }else{
+                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SDO ', this.x,), 'SDO')    
+                                }
                             },
                         },
                     },
