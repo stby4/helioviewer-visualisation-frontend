@@ -22,7 +22,7 @@ var labelFluxXPosition = -20
 
 
 const Chart = container => {
-    return timelineData('2017-01-01:00:00:00', '2018-04-12:00:00:00').then(data =>
+    return timelineData('2008-01-01:00:00:00', '2018-04-12:00:00:00').then(data =>
         Highcharts.chart(container, {
             chart: {
                 height: 300,
@@ -209,10 +209,10 @@ const Chart = container => {
                                         'Value: ' +
                                         this.y
                                 ) */ 
-                                if(Highcharts.dateFormat('%Y', this.x ) <= 2010){
-                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SOHO', this.x,), 'SOHO')
+                                if(Highcharts.dateFormat('%Y', this.x ) < 2010){
+                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SOHO', this.x,), 'SOHO,EIT,EIT')
                                 }else{
-                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SDO ', this.x,), 'SDO')    
+                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SDO ', this.x,), 'SDO,AIA,AIA')    
                                 }
                             },
                         },

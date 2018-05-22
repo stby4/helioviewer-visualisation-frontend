@@ -19,6 +19,6 @@ var minutes = ('0'+timestamp.getUTCMinutes()).substr(-2)
 var timeParam = year + '-' + month + '-' + date + 'T' + hours  + ':' + minutes + ':00Z' 
 var timeDisplay = year + '/' + month + '/' + date + ' ' + hours  + ':' + minutes + ':00 UTC - Satellite: SDO' 
 
-document.getElementById('preview').innerHTML = SolarImagePreview(timeParam, timeDisplay, 'SDO')
+document.getElementById('preview').innerHTML = SolarImagePreview(timeParam, timeDisplay, 'SDO,AIA,AIA')
 
 Timeline()
