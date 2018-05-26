@@ -171,4 +171,4 @@ $RECYCLE.BIN/
 
 # Webpack artifacts
 .cache-loader
-.dist
+/dist

@@ -20,9 +20,25 @@ const labelFontSize = '11pt'
 const labelColor = '#E0E0E3'
 var labelFluxXPosition = -20
 
+const afterSetExtremes = event => {
+    const chart = Highcharts.charts[0]
+
+    chart.showLoading('Loading data from server...')
+    // const from = new Date(event.dataMin)
+    // const to = new Date(event.dataMax)
+
+    // const fromString = `${from.getUTCFullYear()}-${from.getUTCMonth()}-${from.getUTCDay()}:${from.getUTCHours()}:${from.getUTCMinutes()}:${from.getUTCSeconds()}`
+    // const toString = `${to.getUTCFullYear()}-${to.getUTCMonth()}-${to.getUTCDay()}:${to.getUTCHours()}:${to.getUTCMinutes()}:${to.getUTCSeconds()}`
+
+    timelineData(Math.floor(event.dataMin / 1000), Math.ceil(event.dataMax / 1000)).then(data => {
+        chart.series[0].setData(data)
+        chart.hideLoading()
+    })
+}
+
 
 const Chart = container => {
-    return timelineData('2002-01-01:00:00:00', '2018-04-12:00:00:00').then(data =>
+    return timelineData('1009843200', Math.floor((new Date().getDate() - 1).getTime() / 1000)).then(data =>
         Highcharts.chart(container, {
             chart: {
                 height: 300,
@@ -62,12 +78,7 @@ const Chart = container => {
             },
             xAxis: {
                 events: {
-                    setExtremes:function(event) {
-                        alert(
-                            'Min: ' + event.min + '\nMax: ' + event.max
-                        )
-                        
-                    },
+                    afterSetExtremes: afterSetExtremes
                 },
                 type: 'datetime',
                 dateTimeLabelFormats: {
@@ -201,18 +212,18 @@ const Chart = container => {
                     cursor: 'pointer',
                     point: {
                         events: {
-                           click:function(event) {
-                               /*
-                                alert(
-                                    'Date: ' +
-                                        Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ\n', this.x) +
-                                        'Value: ' +
-                                        this.y
-                                ) */ 
-                                if(Highcharts.dateFormat('%Y', this.x ) < 2010){
-                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SOHO', this.x,), 'SOHO,EIT,EIT')
-                                }else{
-                                document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SDO ', this.x,), 'SDO,AIA,AIA')    
+                            click: function (event) {
+                                /*
+                                 alert(
+                                     'Date: ' +
+                                         Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ\n', this.x) +
+                                         'Value: ' +
+                                         this.y
+                                 ) */
+                                if (Highcharts.dateFormat('%Y', this.x) < 2010) {
+                                    document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SOHO', this.x, ), 'SOHO,EIT,EIT')
+                                } else {
+                                    document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SDO ', this.x, ), 'SDO,AIA,AIA')
                                 }
                             },
                         },
@@ -223,7 +234,7 @@ const Chart = container => {
             series: [
                 {
                     showInLegend: false,
-                data
+                    data
                 },
             ],
         })

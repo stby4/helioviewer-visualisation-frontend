@@ -54,7 +54,7 @@ module.exports = function (env) {
     if (isProd) {
         plugins.push(
             // create css bundle
-            new ExtractTextPlugin('style-[contenthash:8].css'),
+            new ExtractTextPlugin('style-[sha512:contenthash:base64:8].css'),
             new webpack.HashedModuleIdsPlugin(),
         )
 
