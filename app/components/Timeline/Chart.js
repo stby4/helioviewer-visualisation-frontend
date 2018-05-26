@@ -3,10 +3,10 @@ import style from './style'
 import { Theme } from './Theme'
 import demoDateValues from './demoDateValues'
 import { timelineData } from '../../modules/loader'
-import boost from 'highcharts/modules/boost'
+// import boost from 'highcharts/modules/boost'
 import SolarImagePreview from 'components/SolarImage'
 
-boost(Highcharts)
+// boost(Highcharts)
 /**
  * Creates a highchart object
  * @param {string} container - The ID for the highcharts container
@@ -20,6 +20,11 @@ const labelFontSize = '11pt'
 const labelColor = '#E0E0E3'
 var labelFluxXPosition = -20
 
+// end three days ago to guarantee available data at "Tag der Sonne"
+let fromDate = '1009843200000'
+let toDate = new Date()
+toDate = Math.floor(toDate.setDate(toDate.getDate() - 3))
+
 const afterSetExtremes = event => {
     const chart = Highcharts.charts[0]
 
@@ -30,17 +35,25 @@ const afterSetExtremes = event => {
     // const fromString = `${from.getUTCFullYear()}-${from.getUTCMonth()}-${from.getUTCDay()}:${from.getUTCHours()}:${from.getUTCMinutes()}:${from.getUTCSeconds()}`
     // const toString = `${to.getUTCFullYear()}-${to.getUTCMonth()}-${to.getUTCDay()}:${to.getUTCHours()}:${to.getUTCMinutes()}:${to.getUTCSeconds()}`
 
-    timelineData(Math.floor(event.dataMin / 1000), Math.ceil(event.dataMax / 1000)).then(data => {
-        chart.series[0].setData(data)
-        chart.hideLoading()
-    })
+    if ("undefined" === typeof event.xAxis) {
+        timelineData(fromDate, toDate).then(data => {
+            chart.series[0].setData(data)
+            chart.hideLoading()
+        })
+    } else {
+        timelineData(Math.floor(event.xAxis[0].min), Math.ceil(event.xAxis[0].max)).then(data => {
+            chart.series[0].setData(data)
+            chart.hideLoading()
+        })
+    }
 }
 
 
 const Chart = container => {
-    return timelineData('1009843200', Math.floor((new Date().getDate() - 1).getTime() / 1000)).then(data =>
+    return timelineData(fromDate, toDate).then(data =>
         Highcharts.chart(container, {
             chart: {
+                animation: false,
                 height: 300,
                 zoomType: 'x',
                 marginLeft: 150,
@@ -64,6 +77,10 @@ const Chart = container => {
                     },
                 },
 
+                events: {
+                    selection: afterSetExtremes
+                }
+
                 //cick events on the whole chart
                 /*
                 events: {
@@ -77,9 +94,9 @@ const Chart = container => {
                 */
             },
             xAxis: {
-                events: {
-                    afterSetExtremes: afterSetExtremes
-                },
+                // events: {
+                //     afterSetExtremes: afterSetExtremes
+                // },
                 type: 'datetime',
                 dateTimeLabelFormats: {
                     /*
