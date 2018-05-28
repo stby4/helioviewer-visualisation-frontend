@@ -10,7 +10,7 @@
     position: relative;
     top: -30px;
     //text-align: center;
-    font-size: 14pt;
+    font-size: 12pt;
     color: #E0E0E3;
     z-index: 3;
   }
@@ -20,7 +20,7 @@
    max-width: 100vw;
    height: auto;
    min-height: 10vh;
-   max-height: 50vh;
+   max-height: 40vh;
    position: relative;
    z-index: 1;
    }
@@ -28,7 +28,7 @@
 #solarImage {
   height: auto;
   width: auto;
-  max-height: 50vh;
+  max-height: 40vh;
   max-width: 100vw;
   z-index: 2;
   position: absolute;

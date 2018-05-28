@@ -23,7 +23,7 @@ var labelFluxXPosition = -20
 // end three days ago to guarantee available data at "Tag der Sonne"
 let fromDate = '1009843200000'
 let toDate = new Date()
-toDate = Math.floor(toDate.setDate(toDate.getDate() - 3))
+toDate = Math.floor(toDate.setDate(toDate.getDate() - 1))
 
 const afterSetExtremes = event => {
     const chart = Highcharts.charts[0]
@@ -32,8 +32,8 @@ const afterSetExtremes = event => {
     // const from = new Date(event.dataMin)
     // const to = new Date(event.dataMax)
 
-    // const fromString = `${from.getUTCFullYear()}-${from.getUTCMonth()}-${from.getUTCDay()}:${from.getUTCHours()}:${from.getUTCMinutes()}:${from.getUTCSeconds()}`
-    // const toString = `${to.getUTCFullYear()}-${to.getUTCMonth()}-${to.getUTCDay()}:${to.getUTCHours()}:${to.getUTCMinutes()}:${to.getUTCSeconds()}`
+    // const fromString = `${from.getUTCFullYear()}-${(1+from.getUTCMonth()}-${from.getUTCDay()}:${from.getUTCHours()}:${from.getUTCMinutes()}:${from.getUTCSeconds()}`
+    // const toString = `${to.getUTCFullYear()}-${1+to.getUTCMonth()}-${to.getUTCDay()}:${to.getUTCHours()}:${to.getUTCMinutes()}:${to.getUTCSeconds()}`
 
     if ("undefined" === typeof event.xAxis) {
         timelineData(fromDate, toDate).then(data => {
