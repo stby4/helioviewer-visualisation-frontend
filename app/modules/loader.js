@@ -9,7 +9,7 @@
  */
 
 export const timelineData = (from, to) => {
-    const url = 'http://86.119.41.48:8080/api/api?from=' + from + '&to=' + to + '&points=' + (2*window.innerWidth)
+    const url = 'http://86.119.41.48:8080/api?from=' + from + '&to=' + to + '&points=' + (2*window.innerWidth)
 
     return fetch(url)
         .then(response => response.json())
