@@ -1,4 +1,5 @@
 @import 'theme/__variables';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 html,
 body {
@@ -28,8 +29,9 @@ padding-top: 10px;
 
 h1{
   text-align: center;
-  font-size: 22pt;
+  font-size: 3rem;
   margin-bottom: 0px;
   font-weight: normal;
-  color: #E0E0E3;
+  color: lightblue;
+  font-family: 'Open Sans', sans-serif;
 }
