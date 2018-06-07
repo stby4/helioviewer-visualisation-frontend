@@ -36,10 +36,22 @@
 
 .button {
   position: relative;
-  top: -15px;
-  background-color: lightblue;
-  color: black;
+  top: -10px;
+  font-size: 1.2rem;
   padding: 0.2em 0.4em;
-  font-size: 0.8em;
+  border: 1px solid lightblue;
+  color: lightblue;
   border-radius: 0.1em;
+  cursor: pointer;
+  transition: all 200ms;
+  text-decoration: none;
+
+  &:hover {
+        color: black;
+        background: lightblue;
+    }
+
+    &:active {
+        box-shadow: 0 0 0 3px rgba(173, 216, 230, 0.5);
+    }
 }

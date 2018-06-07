@@ -20,83 +20,76 @@ const labelFontSize = '11pt'
 const labelColor = '#E0E0E3'
 var labelFluxXPosition = -20
 
-// end three days ago to guarantee available data at "Tag der Sonne"
-let fromDate = '1009843200000'
-let toDate = new Date()
-toDate = Math.floor(toDate.setDate(toDate.getDate() - 1))
+let chart
+
+const minDate = 1009843200000
+const maxDate = new Date().getTime()
+let fromDate = minDate
+let toDate = maxDate
+
+// use two stacks to save zoom boundary history 
+let fromDateStack = [fromDate]
+let toDateStack = [toDate]
+
 
 const afterSetExtremes = event => {
-    const chart = Highcharts.charts[0]
-
     chart.showLoading('Loading data from server...')
-    // const from = new Date(event.dataMin)
-    // const to = new Date(event.dataMax)
 
-    // const fromString = `${from.getUTCFullYear()}-${(1+from.getUTCMonth()}-${from.getUTCDay()}:${from.getUTCHours()}:${from.getUTCMinutes()}:${from.getUTCSeconds()}`
-    // const toString = `${to.getUTCFullYear()}-${1+to.getUTCMonth()}-${to.getUTCDay()}:${to.getUTCHours()}:${to.getUTCMinutes()}:${to.getUTCSeconds()}`
-
-    if ("undefined" === typeof event.xAxis) {
-        timelineData(fromDate, toDate).then(data => {
-            chart.series[0].setData(data)
-            chart.hideLoading()
-        })
-    } else {
-        timelineData(Math.floor(event.xAxis[0].min), Math.ceil(event.xAxis[0].max)).then(data => {
-            chart.series[0].setData(data)
-            chart.hideLoading()
-        })
+    if (event && "undefined" !== typeof event.userMin) {
+        fromDate = Math.floor(event.userMin)
+        toDate = Math.ceil(event.userMax)
     }
+
+    fromDateStack.push(fromDate)
+    toDateStack.push(toDate)
+
+    timelineData(fromDate, toDate).then(data => {
+        chart.series[0].setData(data, true)
+    }).finally(() => {
+        chart.hideLoading()
+    })
 }
 
 
-const Chart = container => {
+
+const resetZoom = () => {
+    if (1 < fromDateStack.length) {
+        fromDateStack.pop()
+        toDateStack.pop()
+        fromDate = fromDateStack.pop()
+        toDate = toDateStack.pop()
+    } else {
+        fromDate = minDate
+        toDate = maxDate
+    }
+
+    chart.xAxis[0].setExtremes(fromDate, toDate, true)
+
+    return false
+}
+
+
+
+const Chart = (container, resetElementID) => {
+    document.getElementById(resetElementID).onclick = resetZoom
+
     return timelineData(fromDate, toDate).then(data =>
-        Highcharts.chart(container, {
+        chart = Highcharts.chart(container, {
             chart: {
                 animation: false,
                 height: 300,
                 zoomType: 'x',
                 marginLeft: 150,
                 resetZoomButton: {
-                    position: {
-                        x: -10,
-                        y: -40,
-                    },
                     theme: {
-                        fill: 'white',
-                        r: 0,
-                        // text: 'Zurücksetzen',
-                        states: {
-                            hover: {
-                                fill: 'grey',
-                                style: {
-                                    color: 'white',
-                                },
-                            },
-                        },
+                        display: 'none'
                     },
                 },
-
-                events: {
-                    selection: afterSetExtremes
-                }
-
-                //cick events on the whole chart
-                /*
-                events: {
-                    click(event) {
-                        cursor: 'pointer',
-                        alert (
-                            'Date: ' + Highcharts.dateFormat('%Y %m %d %H %M %S \n', event.xAxis[0].value) + 'Value: ' + event.yAxis[0].value
-                        );
-                    }
-                }, 
-                */
             },
             xAxis: {
-                // events: {
-                //     afterSetExtremes: afterSetExtremes
-                // },
+                events: {
+                    afterSetExtremes: afterSetExtremes
+                },
                 type: 'datetime',
                 dateTimeLabelFormats: {
                     /*
