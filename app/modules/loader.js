@@ -9,9 +9,9 @@
  */
 
 export const timelineData = (from, to) => {
-    const url = 'http://86.119.41.48:8080/api?from=' + from + '&to=' + to + '&points=' + (2*window.innerWidth)
-
-    return fetch(url, { mode: 'no-cors' })
+    const url = 'http://86.119.41.48/api?from=' + from + '&to=' + to + '&points=' + (2 * window.innerWidth)
+    
+    return fetch(url)
         .then(response => response.json())
         .then(json => json)
 }
