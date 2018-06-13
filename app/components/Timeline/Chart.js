@@ -45,7 +45,7 @@ const afterSetExtremes = event => {
 
     timelineData(fromDate, toDate).then(data => {
         chart.series[0].setData(data, true)
-    }).finally(() => {
+    }).then(() => {
         chart.hideLoading()
     })
 }
