@@ -229,6 +229,12 @@ const Chart = (container, resetElementID) => {
                     name: "X-ray Flux",
                     allowPointSelect: true,
                     cursor: 'pointer',
+                    linewidth: 2,
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0,
+                        }
+                    },
                     point: {
                         events: {
                             click: function (event) {
