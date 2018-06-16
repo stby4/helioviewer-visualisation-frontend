@@ -8,8 +8,9 @@ Lightweight frontend for the helioviewer visualisation (timeline)
 
 # Getting started
 This project uses [Node.js](https://nodejs.org/) and [yarn](https://yarnpkg.com/). Install them, if you have not already done so.
-1. Open a console and exexute `yarn` to install all dependencies
-2. `yarn start` to start dev server
+1. Open a terminal, PowerShell, ... and execute `git clone https://github.com/stby4/helioviewer-visualisation-frontend.git heliovis-front`.
+1. `cd heliovis-front`, `yarn` to install all dependencies
+2. `yarn start` to start development server with [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)
 3. Open your favourite browser and navigate to [localhost:8082](http://localhost:8082)
 
 # Build and test
@@ -34,6 +35,7 @@ Tests shall be placed close to the files that are beeing tested. Create a folder
 ## Structure
 The _app_ directory contains:
 - modules: [ES6 modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) to provide functionality
+- components: ES6 modules to provide UI
 - modules/\__tests__: Jest test cases
 - theme: Sass-Files
 
