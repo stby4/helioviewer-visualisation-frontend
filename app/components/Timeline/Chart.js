@@ -86,6 +86,15 @@ const Chart = (container, resetElementID) => {
                     },
                 },
             },
+            tooltip: {
+                enabled:false,
+                crosshairs: {
+                    color: 'green',
+                    dashStyle: 'solid'
+                },
+            
+                shared: true
+            },
             xAxis: {
                 events: {
                     afterSetExtremes: afterSetExtremes
