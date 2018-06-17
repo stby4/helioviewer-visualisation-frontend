@@ -3,10 +3,12 @@ import style from './style'
 import { Theme } from './Theme'
 import demoDateValues from './demoDateValues'
 import { timelineData } from '../../modules/loader'
-// import boost from 'highcharts/modules/boost'
 import SolarImagePreview from 'components/SolarImage'
+// import boost from 'highcharts/modules/boost'
 
 // boost(Highcharts)
+
+
 /**
  * Creates a highchart object
  * @param {string} container - The ID for the highcharts container
