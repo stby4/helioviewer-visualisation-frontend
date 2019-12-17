@@ -1,13 +1,10 @@
 import Highcharts from 'highcharts'
-import style from './style'
 import { Theme } from './Theme'
-import demoDateValues from './demoDateValues'
 import { timelineData } from '../../modules/loader'
 import SolarImagePreview from 'components/SolarImage'
 // import boost from 'highcharts/modules/boost'
 
 // boost(Highcharts)
-
 
 /**
  * Creates a highchart object
@@ -29,15 +26,14 @@ const maxDate = new Date().getTime()
 let fromDate = minDate
 let toDate = maxDate
 
-// use two stacks to save zoom boundary history 
+// use two stacks to save zoom boundary history
 let fromDateStack = [fromDate]
 let toDateStack = [toDate]
-
 
 const afterSetExtremes = event => {
     chart.showLoading('Loading data from server...')
 
-    if (event && "undefined" !== typeof event.userMin) {
+    if (event && 'undefined' !== typeof event.userMin) {
         fromDate = Math.floor(event.userMin)
         toDate = Math.ceil(event.userMax)
     }
@@ -45,14 +41,14 @@ const afterSetExtremes = event => {
     fromDateStack.push(fromDate)
     toDateStack.push(toDate)
 
-    timelineData(fromDate, toDate).then(data => {
-        chart.series[0].setData(data, true)
-    }).then(() => {
-        chart.hideLoading()
-    })
+    timelineData(fromDate, toDate)
+        .then(data => {
+            chart.series[0].setData(data, true)
+        })
+        .then(() => {
+            chart.hideLoading()
+        })
 }
-
-
 
 const resetZoom = () => {
     if (1 < fromDateStack.length) {
@@ -70,201 +66,208 @@ const resetZoom = () => {
     return false
 }
 
-
-
 const Chart = (container, resetElementID) => {
     document.getElementById(resetElementID).onclick = resetZoom
 
-    return timelineData(fromDate, toDate).then(data =>
-        chart = Highcharts.chart(container, {
-            chart: {
-                animation: false,
-                height: 300,
-                zoomType: 'x',
-                marginLeft: 150,
-                resetZoomButton: {
-                    theme: {
-                        display: 'none'
+    return timelineData(fromDate, toDate).then(
+        data =>
+            (chart = Highcharts.chart(container, {
+                chart: {
+                    animation: false,
+                    height: 300,
+                    zoomType: 'x',
+                    marginLeft: 150,
+                    resetZoomButton: {
+                        theme: {
+                            display: 'none',
+                        },
                     },
                 },
-            },
-            tooltip: {
-                enabled:false,
-                crosshairs: {
-                    color: 'green',
-                    dashStyle: 'solid'
+                tooltip: {
+                    enabled: false,
+                    crosshairs: {
+                        color: 'green',
+                        dashStyle: 'solid',
+                    },
+
+                    shared: true,
                 },
-            
-                shared: true
-            },
-            xAxis: {
-                events: {
-                    afterSetExtremes: afterSetExtremes
-                },
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                    /*
-             *  millisecond: '%H:%M:%S.%L',
-             * second: '%H:%M:%S',
-             * minute: '%H:%M',
-             * hour: '%H:%M',
-             * day: '%d    .%m.%Y',
-             * week: '%m.%Y',
-             * month: '%m\'%Y',
-             *year: '%Y' 
-             */
-                },
-                labels: {
-                    style: {
-                        fontSize: labelFontSize,
+                xAxis: {
+                    events: {
+                        afterSetExtremes,
+                    },
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                        /*
+                         *  millisecond: '%H:%M:%S.%L',
+                         * second: '%H:%M:%S',
+                         * minute: '%H:%M',
+                         * hour: '%H:%M',
+                         * day: '%d    .%m.%Y',
+                         * week: '%m.%Y',
+                         * month: '%m\'%Y',
+                         *year: '%Y'
+                         */
+                    },
+                    labels: {
+                        style: {
+                            fontSize: labelFontSize,
+                        },
                     },
                 },
-            },
-            title: {
-                text: 'Solar Activity Timeline',
-            },
-            yAxis: {
-                type: 'logarithmic',
-                min: 0.000000009,
-                /*
-             *additional horizontal dividers in chart
-             *minorTickInterval: 0.1, 
-             */
                 title: {
-                    text: 'X-ray Flux',
-                    x: 0,
-                    style: {
-                        fontSize: '14pt',
-                    },
+                    text: 'Solar Activity Timeline',
                 },
-                labels: {
-                    x: -40,
-                    style: {
-                        fontSize: labelFontSize,
+                yAxis: {
+                    type: 'logarithmic',
+                    min: 0.000000009,
+                    /*
+                     *additional horizontal dividers in chart
+                     *minorTickInterval: 0.1,
+                     */
+                    title: {
+                        text: 'X-ray Flux',
+                        x: 0,
+                        style: {
+                            fontSize: '14pt',
+                        },
                     },
+                    labels: {
+                        x: -40,
+                        style: {
+                            fontSize: labelFontSize,
+                        },
+                    },
+                    gridLineWidth: 1,
+                    tickLength: 35,
+                    plotBands: [
+                        {
+                            // A-Flare
+                            from: 0,
+                            to: 0.0000001,
+                            color: 'rgba(40, 40, 40, 40)',
+                            borderwidth: '100',
+                            borderColor: '#FFFF',
+                            label: {
+                                text: 'A',
+                                x: labelFluxXPosition,
+                                style: {
+                                    color: labelColor,
+                                    fontWeight: 'bold',
+                                    fontSize: labelFontSize,
+                                },
+                            },
+                        },
+                        {
+                            // B-Flare
+                            from: 0.0000001,
+                            to: 0.000001,
+                            color: 'rgba(0, 0, 0, 0)',
+                            label: {
+                                text: 'B',
+                                x: labelFluxXPosition,
+                                style: {
+                                    color: labelColor,
+                                    fontWeight: 'bold',
+                                    fontSize: labelFontSize,
+                                },
+                            },
+                        },
+                        {
+                            // C-Flare
+                            from: 0.000001,
+                            to: 0.00001,
+                            color: 'rgba(40, 40, 40, 40)',
+                            label: {
+                                text: 'C',
+                                x: labelFluxXPosition,
+                                style: {
+                                    color: labelColor,
+                                    fontWeight: 'bold',
+                                    fontSize: labelFontSize,
+                                },
+                            },
+                        },
+                        {
+                            // M-Flare
+                            from: 0.00001,
+                            to: 0.0001,
+                            // zIndex: 5,
+                            color: 'rgba(0, 0, 0, 0)',
+                            label: {
+                                text: 'M',
+                                x: labelFluxXPosition,
+                                style: {
+                                    color: labelColor,
+                                    fontWeight: 'bold',
+                                    fontSize: labelFontSize,
+                                },
+                            },
+                        },
+                        {
+                            // X-Flare
+                            from: 0.0001,
+                            to: 1000000000,
+                            color: 'rgba(40, 40, 40, 40)',
+                            label: {
+                                text: 'X',
+                                x: labelFluxXPosition,
+                                style: {
+                                    color: labelColor,
+                                    fontWeight: 'bold',
+                                    fontSize: labelFontSize,
+                                },
+                            },
+                        },
+                    ],
                 },
-                gridLineWidth: 1,
-                tickLength: 35,
-                plotBands: [
-                    {
-                        // A-Flare
-                        from: 0,
-                        to: 0.0000001,
-                        color: 'rgba(40, 40, 40, 40)',
-                        borderwidth: '100',
-                        borderColor: '#FFFF',
-                        label: {
-                            text: 'A',
-                            x: labelFluxXPosition,
-                            style: {
-                                color: labelColor,
-                                fontWeight: 'bold',
-                                fontSize: labelFontSize,
+                plotOptions: {
+                    series: {
+                        name: 'X-ray Flux',
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        linewidth: 2,
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0,
                             },
                         },
-                    },
-                    {
-                        // B-Flare
-                        from: 0.0000001,
-                        to: 0.000001,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: 'B',
-                            x: labelFluxXPosition,
-                            style: {
-                                color: labelColor,
-                                fontWeight: 'bold',
-                                fontSize: labelFontSize,
+                        point: {
+                            events: {
+                                click(event) {
+                                    /*
+                                     *alert(
+                                     *    'Date: ' +
+                                     *        Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ\n', this.x) +
+                                     *        'Value: ' +
+                                     *        this.y
+                                     *)
+                                     */
+                                    if (Highcharts.dateFormat('%Y', this.x) < 2010)
+                                        document.getElementById('preview').innerHTML = SolarImagePreview(
+                                            Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x),
+                                            Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SOHO', this.x),
+                                            'SOHO,EIT,EIT'
+                                        )
+                                    else
+                                        document.getElementById('preview').innerHTML = SolarImagePreview(
+                                            Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x),
+                                            Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SDO ', this.x),
+                                            'SDO,AIA,AIA'
+                                        )
+                                },
                             },
+                            // lineWidth: 0.7,
                         },
                     },
-                    {
-                        // C-Flare
-                        from: 0.000001,
-                        to: 0.00001,
-                        color: 'rgba(40, 40, 40, 40)',
-                        label: {
-                            text: 'C',
-                            x: labelFluxXPosition,
-                            style: {
-                                color: labelColor,
-                                fontWeight: 'bold',
-                                fontSize: labelFontSize,
-                            },
+                    series: [
+                        {
+                            showInLegend: false,
+                            data,
                         },
-                    },
-                    {
-                        // M-Flare
-                        from: 0.00001,
-                        to: 0.0001,
-                        // zIndex: 5,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: 'M',
-                            x: labelFluxXPosition,
-                            style: {
-                                color: labelColor,
-                                fontWeight: 'bold',
-                                fontSize: labelFontSize,
-                            },
-                        },
-                    },
-                    {
-                        // X-Flare
-                        from: 0.0001,
-                        to: 1000000000,
-                        color: 'rgba(40, 40, 40, 40)',
-                        label: {
-                            text: 'X',
-                            x: labelFluxXPosition,
-                            style: {
-                                color: labelColor,
-                                fontWeight: 'bold',
-                                fontSize: labelFontSize,
-                            },
-                        },
-                    },
-                ],
-            },
-            plotOptions: {
-                series: {
-                    name: "X-ray Flux",
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    linewidth: 2,
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0,
-                        }
-                    },
-                    point: {
-                        events: {
-                            click: function (event) {
-                                /*
-                                 alert(
-                                     'Date: ' +
-                                         Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ\n', this.x) +
-                                         'Value: ' +
-                                         this.y
-                                 ) */
-                                if (Highcharts.dateFormat('%Y', this.x) < 2010) {
-                                    document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SOHO', this.x, ), 'SOHO,EIT,EIT')
-                                } else {
-                                    document.getElementById('preview').innerHTML = SolarImagePreview(Highcharts.dateFormat('%Y-%m-%dT%H:%M:%SZ', this.x), Highcharts.dateFormat('%Y/%m/%d %H:%M:%S UTC - Satellite: SDO ', this.x, ), 'SDO,AIA,AIA')
-                                }
-                            },
-                        },
-                    },
-                    // lineWidth: 0.7,
+                    ],
                 },
-            },
-            series: [
-                {
-                    showInLegend: false,
-                    data
-                },
-            ],
-        })
+            }))
     )
 }
 

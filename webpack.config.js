@@ -61,28 +61,24 @@ module.exports = function (env) {
         cssLoader = ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-                'cache-loader',
-                {
-                    loader: 'thread-loader',
-                    options: {
-                        workerParallelJobs: 2,
-                    },
-                },
                 {
                     loader: 'css-loader',
                     options: {
-                        module: true, // css-loader 0.14.5 compatible
-                        modules: true,
+                        modules: {
+                            localIdentName: '[hash:base64:5]',
+                            context: sourcePath,
+                        },
                         importLoaders: 1,
-                        localIdentName: '[hash:base64:5]',
                     },
                 },
                 {
                     loader: 'sass-loader',
                     options: {
-                        outputStyle: 'collapsed',
                         sourceMap: true,
-                        includePaths: [sourcePath],
+                        sassOptions: {
+                            includePaths: [sourcePath],
+                            outputStyle: 'collapsed',
+                        },
                     },
                 },
             ],
@@ -109,17 +105,20 @@ module.exports = function (env) {
             {
                 loader: 'css-loader',
                 options: {
-                    module: true,
                     importLoaders: 1,
-                    localIdentName: '[path][name]-[local]',
+                    modules: {
+                        localIdentName: '[path][name]-[local]',
+                    },
                 },
             },
             {
                 loader: 'sass-loader',
                 options: {
-                    outputStyle: 'expanded',
                     sourceMap: false,
-                    includePaths: [sourcePath],
+                    sassOptions: {
+                        includePaths: [sourcePath],
+                        outputStyle: 'expanded',
+                    },
                 },
             },
         ]

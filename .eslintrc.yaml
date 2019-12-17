@@ -56,10 +56,6 @@ rules:
       ClassDeclaration: true
       ArrowFunctionExpression: false
       FunctionExpression: false
-  quotes:
-  - 2
-  - single
-  - allowTemplateLiterals: true
   sort-vars: 1
   valid-jsdoc: 2
   spaced-comment:
